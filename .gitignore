@@ -1,0 +1,16 @@
+# Ignorování složky s nainstalovanými balíčky
+node_modules/
+
+# Ignorování souborů s konfigurací uživatelského prostředí
+.env
+
+# Ignorování souboru s logy
+*.log
+
+# Ignorování operačních systémových souborů
+.DS_Store
+Thumbs.db
+
+# Ignorování souborů a složek specifických pro IDE
+.idea/
+.vscode/
