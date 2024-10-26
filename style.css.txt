@@ -1,0 +1,132 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+}
+
+header {
+    background: #5a67d8;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav button {
+    margin: 0 10px;
+    padding: 10px 15px;
+    background: #2b6cb0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+nav button:hover {
+    background: #276749;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.sections {
+    display: flex;
+    flex-direction: column; /* Všechny sekce jsou nyní pod sebou */
+    width: 100%;
+    max-width: 600px;
+}
+
+section {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin: 10px 0; /* Mezera mezi sekcemi */
+    padding: 20px;
+    transition: transform 0.3s;
+}
+
+section:hover {
+    transform: scale(1.01); /* Jemné zvětšení sekce při najetí myší */
+}
+
+.hidden {
+    display: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+button[type="submit"] {
+    background: #5a67d8;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #4c51bf;
+}
+
+.message-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    height: 200px; /* Vyšší okno pro zprávy */
+    overflow-y: auto; /* Přidá scrollování, pokud je potřeba */
+    margin: 10px 0;
+    background-color: #f9f9f9;
+}
+
+.chat-message {
+    background: #e1f7d5;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    transition: background 0.3s;
+}
+
+.chat-message:hover {
+    background: #cce9c7; /* Jemné ztmavnutí zprávy při najetí myší */
+}
+
+#token-display {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+button.emoji {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+button.emoji:hover {
+    color: #5a67d8; /* Změna barvy při najetí myší */
+}

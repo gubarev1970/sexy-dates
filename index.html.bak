@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sexy Dates</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        nav button {
+            margin: 0 15px;
+            padding: 10px 20px;
+            background: #e8491d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        nav button:hover {
+            background: #d7371d;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .sections {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        section {
+            width: 100%;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button[type="submit"] {
+            background: #e8491d;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background: #d7371d;
+        }
+
+        .message-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            height: 300px; /* Vyšší okno pro zprávy */
+            overflow-y: auto; /* Přidá scrollování, pokud je potřeba */
+            margin: 10px 0;
+        }
+
+        .chat-message {
+            background: #e1f7d5;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .emoji-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            margin: 0 5px;
+        }
+    </style>
+  </head>
+  <body><br>
+    <header>
+      <h1>Sexy Dates</h1>
+      <nav>&nbsp; <video src="videa/video1.mp4" preload="none" controls="controls"
+          height="180" width="360"></video><button onclick="showSection('login')">Přihlášení</button>
+        <button onclick="showSection('chat')">Chat</button> <button onclick="showSection('buyTokens')">Koupit
+          žetony</button> <button onclick="showSection('videoChat')">Videochat</button>
+        <button onclick="showSection('aboutUs')">O nás</button> </nav>
+    </header>
+    <main>
+      <div class="sections">
+        <section id="registration" class="hidden">
+          <h2>Registrace</h2>
+          <form onsubmit="return validateRegistration()"> <input id="username"
+              placeholder="Uživatelské jméno" required="" type="text"> <input id="password"
+              placeholder="Heslo" required="" type="password"> <input id="confirmPassword"
+              placeholder="Potvrďte heslo" required="" type="password"> <button
+              type="submit">Registrovat</button> </form>
+        </section>
+        <section id="login" class="hidden">
+          <h2>Přihlášení</h2>
+          <form onsubmit="return loginUser()"> <input id="login-username" placeholder="Uživatelské jméno"
+              required="" type="text"> <input id="login-password" placeholder="Heslo"
+              required="" type="password"> <button type="submit">Přihlásit se</button>
+          </form>
+        </section>
+        <section id="chat" class="hidden">
+          <h2>Chat</h2>
+          <div id="message-container" class="message-container"></div>
+          <textarea id="message" rows="4" placeholder="Napište zprávu"></textarea>
+          <button onclick="sendMessage()">Odeslat</button> <button class="emoji-button"
+            onclick="addEmoji('😊')">😊</button> <button class="emoji-button" onclick="addEmoji('😍')">😍</button>
+          <button class="emoji-button" onclick="addEmoji('😢')">😢</button>
+          <div>Žetony: <span id="token-count">0</span></div>
+        </section>
+        <section id="buyTokens" class="hidden">
+          <h2>Koupit žetony</h2>
+          <p>Vyberte množství žetonů, které chcete zakoupit. Minimální množství
+            je 500 žetonů a maximální 10 000 žetonů.</p>
+          <label for="tokenAmount">Počet žetonů:</label> <input id="tokenAmount"
+            placeholder="500 - 10000" required="" oninput="updatePrice()" type="number">
+          <div id="priceDisplay">Cena: 0 Kč</div>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"
+            id="paypalForm"> <input name="cmd" value="_s-xclick" type="hidden">
+            <input name="hosted_button_id" value="QT7K3XC3DC6AL" type="hidden">
+            <input name="currency_code" value="CZK" type="hidden"> <input name="item_name"
+              value="Žetony" type="hidden"> <input name="amount" id="tokenPrice"
+              value="" type="hidden"> <button type="button" onclick="buyTokens()">Koupit</button>
+          </form>
+        </section>
+      </div>
+    </main>
+    <script>
+        let tokenCount = 0; // Počet žetonů uživatele
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.sections section');
+            sections.forEach(section => {
+                section.classList.add('hidden'); // Skrýt všechny sekce
+            });
+            document.getElementById(sectionId).classList.remove('hidden'); // Zobrazit vybranou sekci
+        }
+
+        function validateRegistration() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert("Hesla se neshodují.");
+                return false;
+            }
+
+            // Uživatel se úspěšně zaregistroval
+            alert("Registrace proběhla úspěšně! Získali jste 200 žetonů.");
+            tokenCount = 200; // Uživatel dostane 200 žetonů při registraci
+            updateTokenDisplay();
+            showSection('login'); // Přepnout na přihlašovací sekci
+            return false; // Zabránit odeslání formuláře
+        }
+
+        function loginUser() {
+            // Zde může být logika pro přihlášení
+            alert("Přihlášení úspěšné!");
+            // Zde nastavíte počet žetonů na 0 po přihlášení (pokud je to potřeba)
+            // tokenCount = 0; 
+            updateTokenDisplay();
+            showSection('chat'); // Přepnout na chat
+            return false; // Zabránit odeslání formuláře
+        }
+
+        function updateTokenDisplay() {
+            document.getElementById('token-count').innerText = tokenCount; // Aktualizovat zobrazení žetonů
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message');
+            const message = messageInput.value.trim();
+
+            if (message === '') return; // Neodesílat prázdné zprávy
+
+            if (tokenCount >= 50) { // Zpráva stojí 50 žetonů
+                tokenCount -= 50; // Odečíst žetony
+                updateTokenDisplay();
+
+                const messageContainer = document.getElementById('message-container');
+                const chatMessage = document.createElement('div');
+                chatMessage.classList.add('chat-message');
+                chatMessage.innerText = message;
+                messageContainer.appendChild(chatMessage); // Přidat zprávu do kontejneru
+
+                messageInput.value = ''; // Vyčistit vstup
+            } else {
+                alert("Nemáte dostatek žetonů na odeslání zprávy.");
+            }
+        }
+
+        function addEmoji(emoji) {
+            const messageInput = document.getElementById('message');
+            messageInput.value += emoji; // Přidat smajlík do vstupu
+        }
+
+        function updatePrice() {
+            const amount = document.getElementById('tokenAmount').value;
+            const price = amount * 0.50; // Předpokládáme cenu 0.50 Kč za žeton
+            document.getElementById('priceDisplay').innerText = `Cena: ${price.toFixed(2)} Kč`;
+            document.getElementById('tokenPrice').value = price.toFixed(2); // Uložit cenu do hidden inputu
+        }
+
+        function buyTokens() {
+            const amount = document.getElementById('tokenAmount').value;
+            tokenCount += parseInt(amount); // Přidání zakoupených žetonů
+            alert(`Zakoupili jste ${amount} žetonů.`);
+            updateTokenDisplay(); // Aktualizace zobrazení žetonů
+            document.getElementById('paypalForm').submit(); // Odeslat formulář pro PayPal
+        }
+
+        function buyTokens() {
+            const tokenAmount = document.getElementById('tokenAmount').value;
+            const tokenPrice = document.getElementById('tokenPrice').value;
+
+            if (tokenAmount < 500 || tokenAmount > 10000) {
+                alert("Množství žetonů musí být mezi 500 a 10000.");
+                return;
+            }
+
+            // Přidání žetonů po úspěšné platbě
+            tokenCount += parseInt(tokenAmount); // Přidat zakoupené žetony
+            updateTokenDisplay();
+            document.getElementById('paypalForm').submit(); // Odeslat formulář PayPal
+        }
+       document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("saveButton").addEventListener("click", function() {
+                // Přidání položek do localStorage
+                localStorage.setItem("message", "ukládání historie zpráv");
+                localStorage.setItem("tokens", "ukládání historie žetonů");
+                localStorage.setItem("registr", "ukládání historie registr");
+                alert("Data byla uložena do localStorage!");
+            });
+        });
+    </script>
+  </body>
+</html>
