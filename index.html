@@ -7,119 +7,141 @@
     <link rel="stylesheet" href="public/css/style.css">
     
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:#f08080;
+}
 
-        header {
-            background: #35424a;
-            color: #ffffff;
-            padding: 20px 0;
-            text-align: center;
-        }
+header {
+    background:	#000000;
+    color: #dc143c;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
 
-        nav {
-            margin: 20px 0;
-        }
+nav {
+    margin: 20px 0;
+}
 
-        nav button {
-            margin: 0 15px;
-            padding: 10px 20px;
-            background: #e8491d;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+nav button {
+    margin: 0 10px;
+    padding: 10px 15px;
+    background: #ff00ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
 
-        nav button:hover {
-            background: #d7371d;
-        }
+nav button:hover {
+    background: #4b0082;
+}
 
-        main {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
+main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
 
-        .sections {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 600px;
-        }
+.sections {
+    display: flex;
+    flex-direction: column; /* Všechny sekce jsou nyní pod sebou */
+    width: 100%;
+    max-width: 600px;
+}
 
-        section {
-            width: 100%;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 10px 0;
-            padding: 20px;
-        }
+section {
+    width: 100%;
+    background:	#8b0000;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin: 10px 0; /* Mezera mezi sekcemi */
+    padding: 20px;
+    transition: transform 0.3s;
+}
 
-        .hidden {
-            display: none;
-        }
+section:hover {
+    transform: scale(1.01); /* Jemné zvětšení sekce při najetí myší */
+}
 
-        input[type="text"],
-        input[type="password"],
-        input[type="number"],
-        textarea {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1em;
-        }
+.hidden {
+    display: none;
+}
 
-        button[type="submit"] {
-            background: #e8491d;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
 
-        button[type="submit"]:hover {
-            background: #d7371d;
-        }
+button[type="submit"] {
+    background: #5a67d8;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
 
-        .message-container {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            height: 300px; /* Vyšší okno pro zprávy */
-            overflow-y: auto; /* Přidá scrollování, pokud je potřeba */
-            margin: 10px 0;
-        }
+button[type="submit"]:hover {
+    background: #4c51bf;
+}
 
-        .chat-message {
-            background: #e1f7d5;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 5px 0;
-        }
+.message-container {
+    border: 1px solid #da70d6;
+    border-radius: 5px;
+    padding: 10px;
+    height: 200px; /* Vyšší okno pro zprávy */
+    overflow-y: auto; /* Přidá scrollování, pokud je potřeba */
+    margin: 10px 0;
+    background-color: #f9f9f9;
+}
 
-        .emoji-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.5em;
-            margin: 0 5px;
-        }
+.chat-message {
+    background:#da70d6;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    transition: background 0.3s;
+}
+
+.chat-message:hover {
+    background:#da70d6; /* Jemné ztmavnutí zprávy při najetí myší */
+}
+
+#token-display {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+button.emoji {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+button.emoji:hover {
+    color: #5a67d8; /* Změna barvy při najetí myší */
+}
+
+
+
     </style>
 </head>
 <body>
@@ -130,8 +152,6 @@
             <button onclick="showSection('login')">Přihlášení</button>
             <button onclick="showSection('chat')">Chat</button>
             <button onclick="showSection('buyTokens')">Koupit žetony</button>
-            <button onclick="showSection('videoChat')">Videochat</button>
-            <button onclick="showSection('aboutUs')">O nás</button>
         </nav>
     </header>
     <main>
@@ -280,6 +300,33 @@
             tokenCount += parseInt(tokenAmount); // Přidat zakoupené žetony
             updateTokenDisplay();
             document.getElementById('paypalForm').submit(); // Odeslat formulář PayPal
+        }
+        
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.sections section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function submitComment(event) {
+            event.preventDefault(); // Zabránit přesměrování stránky
+
+            const email = document.getElementById('comment-email').value;
+            const message = document.getElementById('comment-message').value.trim();
+
+            if (message === '') return; // Neodesílat prázdný komentář
+
+            const commentsContainer = document.getElementById('comments-container');
+            const commentDiv = document.createElement('div');
+            commentDiv.classList.add('chat-message');
+            commentDiv.innerHTML = `<strong>${email}</strong>: ${message}`; // Vložení emailu a zprávy do divu
+
+            commentsContainer.appendChild(commentDiv); // Přidat nový komentář do kontejneru
+
+            document.getElementById('comment-email').value = ''; // Vyčistit pole e-mailu
+            document.getElementById('comment-message').value = ''; // Vyčistit pole zprávy
         }
     </script>
 </body>
