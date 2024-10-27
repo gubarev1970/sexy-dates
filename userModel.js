@@ -2,11 +2,11 @@ const { Pool } = require('pg');
 
 // Zde zadejte údaje pro připojení k databázi
 const pool = new Pool({
-  user: 'yourUsername',       // Zadejte uživatelské jméno pro databázi
-  host: 'yourHost',           // Zadejte hostitele (např. localhost nebo IP adresa)
-  database: 'yourDatabase',   // Zadejte název databáze
-  password: 'yourPassword',    // Zadejte heslo pro databázi
-  port: 5432,                  // Zadejte port, na kterém databáze naslouchá (default: 5432)
+  user: 'Luis Ganste',       // Zadejte uživatelské jméno pro databázi
+  host: 'localhost',           // Zadejte hostitele (např. localhost nebo IP adresa)
+  database: 'Database_URL',   // Zadejte název databáze
+  password: 'Charalamba11@',    // Zadejte heslo pro databázi
+  port: 3000,                  // Zadejte port, na kterém databáze naslouchá (default: 5432)
 });
 
 // Funkce pro přidání uživatele
