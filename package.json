@@ -1,4 +1,23 @@
-"scripts": {
-  "start": "node server.js",
-  "test": "echo \"Error: no test specified\" && exit 1"
+{
+  "name": "sexy-dates",
+  "version": "1.0.0",
+  "description": "Popis vaší aplikace",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.15"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gubarev1970/sexy-dates"
+  },
+  "author": "Vaše jméno",
+  "license": "ISC"
 }
