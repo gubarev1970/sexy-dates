@@ -1,45 +1,18 @@
-const path = require('path');
-
-// Endpoint pro kořenovou URL
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 const { Pool } = require('pg');
-const express = require('express');
-const { addUser, getUsers } = require('./userModel'); // Import funkcí z userModel.js
-
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  connectionString: process.env.DATABASE_URL, // Zadejte databázový URL z Render.com
+  ssl: { rejectUnauthorized: false } // Tento řádek použijte, pokud je databáze na serveru chráněná SSL
 });
 
-const app = express();
-app.use(express.json());
-
-// Endpoint pro kořenovou URL
-app.get('/', (req, res) => {
-  res.send('Aplikace běží!');
-});
-
-// Endpoint pro registraci uživatele
-app.post('/register', async (req, res) => {
-  const { username, email, password } = req.body;
-  const newUser = await addUser(username, email, password);
-  if (newUser) {
-    res.status(201).json(newUser);
-  } else {
-    res.status(500).send('Chyba při registraci');
+// Příklad dotazu: Vložení nového uživatele
+const addUser = async (username, email, password) => {
+  try {
+    const result = await pool.query(
+      'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+      [username, email, password]
+    );
+    return result.rows[0];
+  } catch (error) {
+    console.error(error);
   }
-});
-
-// Endpoint pro získání všech uživatelů
-app.get('/users', async (req, res) => {
-  const users = await getUsers();
-  res.json(users);
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server běží na portu ${PORT}`);
-});
+};
