@@ -17,3 +17,7 @@ const getUsers = async () => {
 };
 
 module.exports = { addUser, getUsers };
+const PORT = process.env.PORT || 10000; // Render automaticky přiřadí port
+app.listen(PORT, () => {
+  console.log(`Server běží na portu ${PORT}`);
+});
