@@ -1,24 +1,21 @@
-// Importy
-const express = require('express'); // Import Express
-const { Pool } = require('pg'); // Import Pool z pg
-const { addUser, getUsers } = require('./userModel'); // Import funkcí z userModel.js
+const express = require('express');
+const cors = require('cors'); // Přidejte toto
+const { Pool } = require('pg');
+const { addUser, getUsers } = require('./userModel');
 
-// Inicializace Express aplikace
-const app = express(); 
-app.use(express.json()); // Middleware pro JSON
-
-// Inicializace Pool pro PostgreSQL
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // URL z Render.com
+  connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
 
-// Základní GET endpoint
+const app = express();
+app.use(cors()); // Přidejte toto
+app.use(express.json());
+
 app.get('/', (req, res) => {
-  res.send('Aplikace běží!'); // Odpověď na GET /
+  res.send('Aplikace běží!');
 });
 
-// Registrace uživatele (POST)
 app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -30,7 +27,6 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Získání uživatelů (GET)
 app.get('/users', async (req, res) => {
   try {
     const users = await getUsers();
@@ -41,8 +37,7 @@ app.get('/users', async (req, res) => {
   }
 });
 
-// Naslouchání na portu
-const PORT = process.env.PORT || 10000; // Render automaticky přiřadí port
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server běží na portu ${PORT}`);
 });
