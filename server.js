@@ -7,12 +7,11 @@ const pool = new Pool({
 // Příklad dotazu: Vložení nového uživatele
 const addUser = async (username, email, password) => {
   try {
-    const result = await pool.query(
-      'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
-      [username, email, password]
-    );
-    return result.rows[0];
-  } catch (error) {
-    console.error(error);
-  }
-};
+   pool.connect()
+  .then(() => {
+    console.log('Úspěšné připojení k databázi');
+    pool.end();
+  })
+  .catch(err => {
+    console.error('Chyba při připojování k databázi', err);
+  });

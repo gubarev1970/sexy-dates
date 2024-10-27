@@ -1,23 +1,17 @@
-// userModel.js
-const addUser = async (username, email, password) => {
+const createTable = async () => {
   try {
-    const result = await pool.query(
-      'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
-      [username, email, password]
-    );
-    return result.rows[0];
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(100),
+        email VARCHAR(100),
+        password VARCHAR(100)
+      );
+    `);
+    console.log('Tabulka users byla vytvořena.');
   } catch (error) {
     console.error(error);
   }
 };
 
-const getUsers = async () => {
-  try {
-    const result = await pool.query('SELECT * FROM users');
-    return result.rows;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-module.exports = { addUser, getUsers };
+createTable(); // Spusťte tento skript jednou pro vytvoření tabulky
