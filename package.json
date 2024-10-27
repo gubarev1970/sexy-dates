@@ -16,9 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gubarev1970/sexy-dates"
+    "url": "git+https://github.com/gubarev1970/sexy-dates.git"
   },
   "author": "Jaroslav Olah",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/gubarev1970/sexy-dates/issues"
+  },
+  "homepage": "https://github.com/gubarev1970/sexy-dates#readme"
 }
-
