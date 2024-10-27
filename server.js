@@ -1,29 +1,24 @@
-app.post('/register', async (req, res) => {
-  console.log('Request body:', req.body); // Zobrazí tělo požadavku
-  // ... zbytek kódu
-});
-
-
+// Importy
 const express = require('express'); // Import Express
 const { Pool } = require('pg'); // Import Pool z pg
-const cors = require('cors'); // Import CORS
 const { addUser, getUsers } = require('./userModel'); // Import funkcí z userModel.js
 
+// Inicializace Express aplikace
+const app = express(); 
+app.use(express.json()); // Middleware pro JSON
+
+// Inicializace Pool pro PostgreSQL
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // URL z Render.com
   ssl: { rejectUnauthorized: false }
 });
 
-const app = express(); // Inicializace Express aplikace
-app.use(cors()); // Povolení CORS
-app.use(express.json()); // Middleware pro JSON
-
-// Endpoint pro základní URL
-app.post('/', (req, res) => {
-  res.send('Aplikace běží!'); // Odpověď na požadavek na /
+// Základní GET endpoint
+app.get('/', (req, res) => {
+  res.send('Aplikace běží!'); // Odpověď na GET /
 });
 
-// Endpoint pro registraci uživatele
+// Registrace uživatele (POST)
 app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -35,8 +30,8 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Endpoint pro získání všech uživatelů
-app.post('/users', async (req, res) => {
+// Získání uživatelů (GET)
+app.get('/users', async (req, res) => {
   try {
     const users = await getUsers();
     res.json(users);
@@ -46,7 +41,7 @@ app.post('/users', async (req, res) => {
   }
 });
 
-// Port pro naslouchání
+// Naslouchání na portu
 const PORT = process.env.PORT || 10000; // Render automaticky přiřadí port
 app.listen(PORT, () => {
   console.log(`Server běží na portu ${PORT}`);
