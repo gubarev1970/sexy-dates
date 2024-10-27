@@ -13,12 +13,12 @@ app.use(cors()); // Povolení CORS
 app.use(express.json()); // Middleware pro JSON
 
 // Endpoint pro základní URL
-app.post('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Aplikace běží!'); // Odpověď na požadavek na /
 });
 
 // Endpoint pro registraci uživatele
-app.post('/register', async (req, res) => {
+app.get('/register', async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const newUser = await addUser(username, email, password);
@@ -30,7 +30,7 @@ app.post('/register', async (req, res) => {
 });
 
 // Endpoint pro získání všech uživatelů
-app.post('/users', async (req, res) => {
+app.get('/users', async (req, res) => {
   try {
     const users = await getUsers();
     res.json(users);
