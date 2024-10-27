@@ -1,16 +1,19 @@
-
-
 const { Pool } = require('pg');
+const express = require('express');
+const { addUser, getUsers } = require('./userModel'); // Import funkcí z userModel.js
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // URL z Render.com
+  connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
 
-const express = require('express');
-const { addUser, getUsers } = require('./userModel'); // Import funkcí z userModel.js
 const app = express();
-const userModel = require('./userModel');
 app.use(express.json());
+
+// Endpoint pro kořenovou URL
+app.get('/', (req, res) => {
+  res.send('Aplikace běží!');
+});
 
 // Endpoint pro registraci uživatele
 app.post('/register', async (req, res) => {
@@ -33,5 +36,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server běží na portu ${PORT}`);
 });
-
-
