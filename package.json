@@ -1,17 +1,8 @@
 {
-  "name": "Jaroslav Olah",
+  "name": "sexy-dates",
   "version": "1.0.0",
-  "description": "xxx-dates",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
   "dependencies": {
-    "express": "^4.21.1",
-    "pg": "^8.13.1",
-    "socket.io": "^4.8.1"
-  },
-"engines": {
-  "node": "18.x"
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9"
+  }  // <- zde by měla být čárka, pokud následuje další klíč
 }
-
