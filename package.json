@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.11.15"
+    "mongoose": "^5.11.15",
+    "pg": "^8.13.1"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/gubarev1970/sexy-dates"
