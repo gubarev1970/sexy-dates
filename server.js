@@ -1,3 +1,10 @@
+const path = require('path');
+
+// Endpoint pro kořenovou URL
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 const { Pool } = require('pg');
 const express = require('express');
 const { addUser, getUsers } = require('./userModel'); // Import funkcí z userModel.js
