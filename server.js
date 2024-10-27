@@ -1,3 +1,9 @@
+app.post('/register', async (req, res) => {
+  console.log('Request body:', req.body); // Zobrazí tělo požadavku
+  // ... zbytek kódu
+});
+
+
 const express = require('express'); // Import Express
 const { Pool } = require('pg'); // Import Pool z pg
 const cors = require('cors'); // Import CORS
@@ -13,12 +19,12 @@ app.use(cors()); // Povolení CORS
 app.use(express.json()); // Middleware pro JSON
 
 // Endpoint pro základní URL
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
   res.send('Aplikace běží!'); // Odpověď na požadavek na /
 });
 
 // Endpoint pro registraci uživatele
-app.get('/register', async (req, res) => {
+app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const newUser = await addUser(username, email, password);
@@ -30,7 +36,7 @@ app.get('/register', async (req, res) => {
 });
 
 // Endpoint pro získání všech uživatelů
-app.get('/users', async (req, res) => {
+app.post('/users', async (req, res) => {
   try {
     const users = await getUsers();
     res.json(users);
