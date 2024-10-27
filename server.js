@@ -39,7 +39,7 @@ app.get('/users', async (req, res) => {
 });
 
 // Port pro naslouchání
-const PORT = process.env.PORT || 10000; // Render automaticky přiřadí port
+const PORT = process.env.PORT || 3000; // Render automaticky přiřadí port
 app.listen(PORT, () => {
   console.log(`Server běží na portu ${PORT}`);
 });
