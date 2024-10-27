@@ -1,8 +1,4 @@
-{
-  "name": "sexy-dates",
-  "version": "1.0.0",
-  "dependencies": {
-    "express": "^4.17.1",
-    "mongoose": "^5.10.9"
-  }  // <- zde by měla být čárka, pokud následuje další klíč
+"scripts": {
+  "start": "node server.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
 }
