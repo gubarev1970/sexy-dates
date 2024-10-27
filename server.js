@@ -1,11 +1,11 @@
 const express = require('express'); // Import Express
 const { Pool } = require('pg'); // Import Pool z pg
-const { addUser, getUsers } = require('./userModel'); // Import funkcí z userModel.js
 const cors = require('cors'); // Import CORS
+const { addUser, getUsers } = require('./userModel'); // Import funkcí z userModel.js
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // URL z Render.com
-  ssl: { rejectUnauthorized: false } // Přizpůsobte podle potřeby
+  ssl: { rejectUnauthorized: false }
 });
 
 const app = express(); // Inicializace Express aplikace
