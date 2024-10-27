@@ -1,7 +1,13 @@
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL, // URL z Render.com
+  ssl: { rejectUnauthorized: false }
+});
+
 const express = require('express');
 const { addUser, getUsers } = require('./userModel'); // Import funkcí z userModel.js
 const app = express();
-
+const userModel = require('./userModel');
 app.use(express.json());
 
 // Endpoint pro registraci uživatele
@@ -26,26 +32,4 @@ app.listen(PORT, () => {
   console.log(`Server běží na portu ${PORT}`);
 });
 
-const { Pool } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // URL z Render.com
-  ssl: { rejectUnauthorized: false }
-});
 
-const createTable = async () => {
-  try {
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        username VARCHAR(100),
-        email VARCHAR(100),
-        password VARCHAR(100)
-      );
-    `);
-    console.log('Tabulka users byla vytvořena.');
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-createTable(); // Spusťte jednou, poté můžete odstranit nebo zakomentovat
