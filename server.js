@@ -12,7 +12,7 @@ const client = new Client({
   user: 'postgres',
   host: 'localhost',
   database: 'db_url',
-  password: 'tvé_heslo',
+  password: 'Charalamba11@',
   port: 5432,
 });
 
@@ -31,7 +31,3 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Spuštění serveru
-app.listen(port, () => {
-  console.log(`Server běží na http://localhost:${port}`);
-});
