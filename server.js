@@ -4,6 +4,12 @@ const { Client } = require('pg'); // Import PostgreSQL klienta
 const app = express();
 const port = 3000;
 
+const pool = new Pool({
+  connectionString: process.env.db_url, // nebo jiný tvůj připojovací řetězec
+  ssl: false // zde je SSL nastaveno na false
+});
+
+
 // Middleware pro parsování JSON těla požadavku
 app.use(express.json());
 
