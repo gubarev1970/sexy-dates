@@ -12,7 +12,118 @@ function validateRegistration(event) {
         return false;
     }
 
-    // Inicializace tokenCount a zobrazení
+    let currentUser = {
+    username: 'User123', // Zde bude uživatelské jméno
+    email: 'user@example.com', // Zde bude email
+    tokenCount: 200 // Počet žetonů
+};
+
+
+function showProfile() {
+    document.getElementById('profile-username').innerText = currentUser.username;
+    document.getElementById('profile-email').innerText = currentUser.email;
+    document.getElementById('profile-token-count').innerText = currentUser.tokenCount;
+    showSection('profile'); // Zobrazit sekci profilu
+}
+
+function editProfile() {
+    document.getElementById('edit-username').value = currentUser.username;
+    document.getElementById('edit-email').value = currentUser.email;
+    document.getElementById('edit-profile').classList.remove('hidden'); // Zobrazit formulář pro úpravu
+}
+
+function saveProfile() {
+    const newUsername = document.getElementById('edit-username').value.trim();
+    const newEmail = document.getElementById('edit-email').value.trim();
+
+    if (newUsername === '' || newEmail === '') {
+        alert('Vyplňte prosím všechna pole.');
+        return;
+    }
+
+    // Uložení změn do currentUser
+    currentUser.username = newUsername;
+    currentUser.email = newEmail;
+
+    // Aktualizace zobrazených informací
+    showProfile(); // Znovu zobrazit sekci profilu
+    document.getElementById('edit-profile').classList.add('hidden'); // Skrýt formulář pro úpravu
+    alert('Profil byl úspěšně aktualizován!');
+}
+
+function cancelEdit() {
+    document.getElementById('edit-profile').classList.add('hidden'); // Skrýt formulář pro úpravu
+}
+
+    // Uložení změn do currentUser
+    currentUser.username = newUsername;
+    currentUser.email = newEmail;
+function updateProfile() {
+    document.getElementById('username-display').innerText = document.getElementById('username').value; // nebo jiný způsob, jak získat uživatelské jméno
+    // Další aktualizace informací profilu
+}
+
+    // Aktualizace zobrazených informací
+    showProfile(); // Znovu zobrazit sekci profilu
+    document.getElementById('edit-profile').classList.add('hidden'); // Skrýt formulář pro úpravu
+    alert('Profil byl úspěšně aktualizován!');
+}
+
+function cancelEdit() {
+    document.getElementById('edit-profile').classList.add('hidden'); // Skrýt formulář pro úpravu
+}
+
+
+
+function uploadPhoto() {
+    const fileInput = document.getElementById("photoUpload");
+    const file = fileInput.files[0];
+
+    // Zkontroluje, zda byl vybrán soubor
+    if (!file) {
+        alert("Prosím, vyberte fotku.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const imgElement = document.getElementById("previewImage");
+        imgElement.src = event.target.result;
+        imgElement.style.display = "block";
+
+        // Uložení obrázku do localStorage
+        try {
+            localStorage.setItem("profilePhoto", event.target.result);
+            alert("Fotka byla úspěšně nahrána!");
+        } catch (error) {
+            alert("Došlo k chybě při ukládání fotky do localStorage.");
+            console.error("Error:", error);
+        }
+    };
+
+    // Přidáme obslužnou funkci pro chybu
+    reader.onerror = function(error) {
+        alert("Došlo k chybě při načítání fotky.");
+        console.error("FileReader error:", error);
+    };
+
+    // Načte soubor jako URL obrázku
+    reader.readAsDataURL(file);
+}
+
+// Zobrazení uložené fotky při načtení stránky
+window.onload = function() {
+    const savedPhoto = database_url.getItem("profilePhoto");
+    if (savedPhoto) {
+        const imgElement = document.getElementById("previewImage");
+        imgElement.src = savedPhoto;
+        imgElement.style.display = "block";
+    }
+};
+
+
+
+// Inicializace tokenCount a zobrazení
     tokenCount = 200;
     updateTokenDisplay();
 
@@ -23,7 +134,7 @@ function validateRegistration(event) {
 
 // Funkce pro zobrazení profilu
 function displayProfile() {
-    const storedUserData = localStorage.getItem("userData");
+    const storedUserData = database_url.getItem("userData");
     if (storedUserData) {
         const userData = JSON.parse(storedUserData);
         document.getElementById('profileUsername').innerText = userData.username;
@@ -83,16 +194,16 @@ function sendMessage() {
     updateTokenDisplay(); // Aktualizovat zobrazení počtu žetonů
 
     // Uložit zprávu do localStorage
-    const messages = JSON.parse(localStorage.getItem("message") || "[]");
+    const messages = JSON.parse(database_url.getItem("message") || "[]");
     messages.push(message);
-    localStorage.setItem("message", JSON.stringify(messages));
+    DATABASE_URL.setItem("message", JSON.stringify(messages));
 
     messageInput.value = ''; // Vymazat vstup pro zprávu
 }
 
 // Funkce pro načtení historie zpráv
 function loadMessageHistory() {
-    const messages = JSON.parse(localStorage.getItem("message") || "[]");
+    const messages = JSON.parse(database_url.getItem("message") || "[]");
     const messageContainer = document.getElementById('message-container');
     messages.forEach(msg => {
         const messageElement = document.createElement('div');
@@ -133,7 +244,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         username: username,
         tokens: tokenCount
     };
-    localStorage.setItem("userData", JSON.stringify(userData));
+   DATABASE_URL.setItem("userData", JSON.stringify(userData));
 
     validateRegistration(event);
 });

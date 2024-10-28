@@ -150,6 +150,7 @@ button.emoji:hover {
         <nav>
             <button onclick="showSection('registration')">Registrace</button>
             <button onclick="showSection('login')">Přihlášení</button>
+            <button onclick="showSection('profile')">Profil</button>
             <button onclick="showSection('chat')">Chat</button>
             <button onclick="showSection('buyTokens')">Koupit žetony</button>
         </nav>
@@ -163,8 +164,32 @@ button.emoji:hover {
                     <input type="password" id="password" placeholder="Heslo" required>
                     <input type="password" id="confirmPassword" placeholder="Potvrďte heslo" required>
                     <button type="submit">Registrovat</button>
+                
                 </form>
+            
             </section>
+            <section id="profile" class="hidden">
+    <h2>Profil</h2>
+    <div id="profile-info">
+        <p>Uživatelské jméno: <span id="profile-username"></span></p>
+        <p>Email: <span id="profile-email"></span></p>
+        <p>Žetony: <span id="profile-token-count"></span></p>
+    </div>
+    <button onclick="editProfile()">Upravit profil</button>
+    <div id="edit-profile" class="hidden">
+        <h3>Upravit profil</h3>
+        <input type="text" id="edit-username" placeholder="Nové uživatelské jméno" required>
+        <input type="email" id="edit-email" placeholder="Nový email" required>
+        <button onclick="saveProfile()">Uložit změny</button>
+        <button onclick="cancelEdit()">Zrušit</button>
+    </div>
+</section>
+
+
+            
+            
+
+            
             <section id="login" class="hidden">
                 <h2>Přihlášení</h2>
                 <form onsubmit="return loginUser()">
@@ -173,7 +198,9 @@ button.emoji:hover {
                     <button type="submit">Přihlásit se</button>
                 </form>
             </section>
-            <section id="chat" class="hidden">
+            
+           
+                <section id="chat" class="hidden">
                 <h2>Chat</h2>
                 <div id="message-container" class="message-container"></div>
                 <textarea id="message" rows="4" placeholder="Napište zprávu"></textarea>
@@ -329,6 +356,7 @@ button.emoji:hover {
             document.getElementById('comment-message').value = ''; // Vyčistit pole zprávy
         }
     </script>
+<script src="script.js"></script>
 </body>
 </html>
 

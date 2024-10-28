@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors'); // Přidejte toto
+const cors = require('cors');
 const { Pool } = require('pg');
 const { addUser, getUsers } = require('./userModel');
 
@@ -9,14 +9,16 @@ const pool = new Pool({
 });
 
 const app = express();
-app.use(cors()); // Přidejte toto
+app.use(cors());
 app.use(express.json());
 
+// Kořenová cesta
 app.get('/', (req, res) => {
-  res.send('Aplikace běží!');
+  res.send('Server běží. Přístupné cesty: /register, /users');
 });
 
-app.get('/register', async (req, res) => {
+// Registrace uživatele
+app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const newUser = await addUser(username, email, password);
@@ -27,6 +29,7 @@ app.get('/register', async (req, res) => {
   }
 });
 
+// Získání uživatelů
 app.get('/users', async (req, res) => {
   try {
     const users = await getUsers();
@@ -37,7 +40,8 @@ app.get('/users', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 10000;
+// Spuštění serveru
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server běží na portu ${PORT}`);
-  });
+});
