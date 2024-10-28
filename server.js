@@ -12,7 +12,7 @@ const app = express();
 app.use(cors()); // Přidejte toto
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
   res.send('Aplikace běží!');
 });
 
@@ -27,7 +27,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-app.get('/users', async (req, res) => {
+app.post('/users', async (req, res) => {
   try {
     const users = await getUsers();
     res.json(users);
