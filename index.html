@@ -185,7 +185,8 @@ button.emoji:hover {
     </div>
 </section>
 
-
+<h1>Vítejte na mé stránce!</h1>
+  <p>Server běží. Přístupné cesty: /register, /users</p>
             
             
 
@@ -355,6 +356,26 @@ button.emoji:hover {
             document.getElementById('comment-email').value = ''; // Vyčistit pole e-mailu
             document.getElementById('comment-message').value = ''; // Vyčistit pole zprávy
         }
+     document.getElementById('registerForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                alert('Registrace proběhla úspěšně!');
+            } else {
+                alert('Nastala chyba při registraci.');
+            }
+        });
+    
     </script>
 <script src="script.js"></script>
 </body>

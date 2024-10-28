@@ -1,47 +1,37 @@
 const express = require('express');
-const cors = require('cors');
-const { Pool } = require('pg');
-const { addUser, getUsers } = require('./userModel');
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
-});
+const { Client } = require('pg'); // Import PostgreSQL klienta
 
 const app = express();
-app.use(cors());
+const port = 3000;
+
+// Middleware pro parsování JSON těla požadavku
 app.use(express.json());
 
-// Kořenová cesta
-app.get('/', (req, res) => {
-  res.send('Server běží. Přístupné cesty: /register, /users');
+// Připojení k databázi
+const client = new Client({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'db_url',
+  password: 'tvé_heslo',
+  port: 5432,
 });
+
+client.connect();
 
 // Registrace uživatele
 app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
+  
   try {
-    const newUser = await addUser(username, email, password);
-    res.status(201).json(newUser);
-  } catch (error) {
-    console.error('Error adding user:', error);
-    res.status(500).send('Chyba při registraci');
-  }
-});
-
-// Získání uživatelů
-app.get('/users', async (req, res) => {
-  try {
-    const users = await getUsers();
-    res.json(users);
-  } catch (error) {
-    console.error('Error retrieving users:', error);
-    res.status(500).send('Chyba při získávání uživatelů');
+    await client.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3)', [username, email, password]);
+    res.status(201).send('Uživatel zaregistrován.');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Chyba při registraci.');
   }
 });
 
 // Spuštění serveru
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server běží na portu ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server běží na http://localhost:${port}`);
 });
