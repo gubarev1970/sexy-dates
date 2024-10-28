@@ -12,11 +12,11 @@ const app = express();
 app.use(cors()); // Přidejte toto
 app.use(express.json());
 
-app.post('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Aplikace běží!');
 });
 
-app.post('/register', async (req, res) => {
+app.get('/register', async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const newUser = await addUser(username, email, password);
@@ -27,7 +27,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-app.post('/users', async (req, res) => {
+app.get('/users', async (req, res) => {
   try {
     const users = await getUsers();
     res.json(users);
