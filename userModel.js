@@ -4,7 +4,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: 'BATMAN70',       // Zadejte uživatelské jméno pro databázi
   host: 'localhost',           // Zadejte hostitele (např. localhost nebo IP adresa)
-  database: 'DB_URL',   // Zadejte název databáze
+  database: 'db_url',   // Zadejte název databáze
   password: 'Charalamba11@',    // Zadejte heslo pro databázi
   port: 10000,                  // Zadejte port, na kterém databáze naslouchá (default: 5432)
 });
