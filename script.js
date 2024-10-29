@@ -134,7 +134,7 @@ window.onload = function() {
 
 // Funkce pro zobrazení profilu
 function displayProfile() {
-    const storedUserData = database_url.getItem("userData");
+    const storedUserData = db_url.getItem("userData");
     if (storedUserData) {
         const userData = JSON.parse(storedUserData);
         document.getElementById('profileUsername').innerText = userData.username;
@@ -193,8 +193,8 @@ function sendMessage() {
     tokenCount -= 30; // Odečíst 30 žetonů za odeslání zprávy
     updateTokenDisplay(); // Aktualizovat zobrazení počtu žetonů
 
-    // Uložit zprávu do localStorage
-    const messages = JSON.parse(database_url.getItem("message") || "[]");
+    // Uložit zprávu do db_url
+    const messages = JSON.parse(db_url.getItem("message") || "[]");
     messages.push(message);
     DATABASE_URL.setItem("message", JSON.stringify(messages));
 
@@ -203,7 +203,7 @@ function sendMessage() {
 
 // Funkce pro načtení historie zpráv
 function loadMessageHistory() {
-    const messages = JSON.parse(database_url.getItem("message") || "[]");
+    const messages = JSON.parse(db_url.getItem("message") || "[]");
     const messageContainer = document.getElementById('message-container');
     messages.forEach(msg => {
         const messageElement = document.createElement('div');
@@ -235,7 +235,7 @@ window.onload = function() {
     loadMessageHistory();
 };
 
-// Přidání uživatelských dat do localStorage po registraci
+// Přidání uživatelských dat do db_url po registraci
 document.getElementById('registrationForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;
@@ -244,7 +244,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         username: username,
         tokens: tokenCount
     };
-   DATABASE_URL.setItem("userData", JSON.stringify(userData));
+  db_url.setItem("userData", JSON.stringify(userData));
 
     validateRegistration(event);
 });
