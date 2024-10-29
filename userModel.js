@@ -6,7 +6,7 @@ const pool = new Pool({
   host: 'localhost',           // Zadejte hostitele (např. localhost nebo IP adresa)
   database: 'DB_URL',   // Zadejte název databáze
   password: 'Charalamba11@',    // Zadejte heslo pro databázi
-  port: 3000,                  // Zadejte port, na kterém databáze naslouchá (default: 5432)
+  port: 10000,                  // Zadejte port, na kterém databáze naslouchá (default: 5432)
 });
 
 // Funkce pro přidání uživatele

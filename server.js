@@ -8,7 +8,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'db_url',
-  password: 'tvé_heslo', // zde vlož své heslo
+  password: 'Charalamba11@', // zde vlož své heslo
   port: 5432,
 });
 
@@ -35,8 +35,3 @@ app.get('/users', async (req, res) => {
     res.status(500).send("Chyba při načítání uživatelů");
   }
 });
-
-fetch('http://localhost:10000/users')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Chyba při načítání uživatelů:', error));
