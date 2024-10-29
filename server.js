@@ -1,3 +1,6 @@
+res.status(500).json({ error: 'Chyba při načítání uživatelů.' });
+
+
 const express = require('express');
 const { Pool } = require('pg');
 
