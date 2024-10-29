@@ -12,16 +12,6 @@ const pool = new Pool({
   port: 5432,
 });
 
-const baseUrl = 'https://sexy-dates-25.onrender.com/'; // Ujistěte se, že to zahrnuje protokol
-const path = 'a89fc48aedbf63a8d54b4b5e527b01d2/users';
-const url = new URL(path, baseUrl); // Toto bude fungovat
-
-const input = 'a89fc48aedbf63a8d54b4b5e527b01d2/users';
-const fullUrl = input.startsWith('http') ? input : `https://sexy-dates-25.onrender.com/${input}`;
-const request = new Request(fullUrl);
-
-console.log(fullUrl); // Debugging line
-const request = new Request(fullUrl);
 
 
 app.get('/', (req, res) => {
