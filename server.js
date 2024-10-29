@@ -14,7 +14,7 @@ const pool = new Pool({
 
 const BASE_URL = process.env.db_url || 'http://localhost:10000';
 
-fetch(`${db_url}/users`)
+fetch(`${BASE_URL}/users`)
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error('Chyba při načítání uživatelů:', error));
