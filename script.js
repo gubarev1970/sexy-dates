@@ -91,12 +91,12 @@ function uploadPhoto() {
         imgElement.src = event.target.result;
         imgElement.style.display = "block";
 
-        // Uložení obrázku do localStorage
+        // Uložení obrázku do db_url
         try {
             localStorage.setItem("profilePhoto", event.target.result);
             alert("Fotka byla úspěšně nahrána!");
         } catch (error) {
-            alert("Došlo k chybě při ukládání fotky do localStorage.");
+            alert("Došlo k chybě při ukládání fotky do db_url.");
             console.error("Error:", error);
         }
     };
@@ -113,7 +113,7 @@ function uploadPhoto() {
 
 // Zobrazení uložené fotky při načtení stránky
 window.onload = function() {
-    const savedPhoto = database_url.getItem("profilePhoto");
+    const savedPhoto = db_url.getItem("profilePhoto");
     if (savedPhoto) {
         const imgElement = document.getElementById("previewImage");
         imgElement.src = savedPhoto;
@@ -196,7 +196,7 @@ function sendMessage() {
     // Uložit zprávu do db_url
     const messages = JSON.parse(db_url.getItem("message") || "[]");
     messages.push(message);
-    DATABASE_URL.setItem("message", JSON.stringify(messages));
+    db_url.setItem("message", JSON.stringify(messages));
 
     messageInput.value = ''; // Vymazat vstup pro zprávu
 }

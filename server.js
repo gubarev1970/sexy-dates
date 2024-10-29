@@ -12,9 +12,9 @@ const pool = new Pool({
   port: 5432,
 });
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:10000';
+const BASE_URL = process.env.db_url || 'http://localhost:10000';
 
-fetch(`${BASE_URL}/users`)
+fetch(`${db_url}/users`)
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error('Chyba při načítání uživatelů:', error));
