@@ -13,7 +13,7 @@ const pool = new Pool({
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.listen(port, () => {
