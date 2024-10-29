@@ -12,6 +12,14 @@ const pool = new Pool({
   port: 5432,
 });
 
+const BASE_URL = process.env.BASE_URL || 'http://localhost:10000';
+
+fetch(`${BASE_URL}/users`)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Chyba při načítání uživatelů:', error));
+
+
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
@@ -27,9 +35,8 @@ app.get('/users', async (req, res) => {
     res.status(500).send("Chyba při načítání uživatelů");
   }
 });
-fetch('/users')
+
+fetch('http://localhost:10000/users')
   .then(response => response.json())
-  .then(data => {
-    // Logika pro zobrazení uživatelů
-  })
-  .catch(error => console.error("Chyba při načítání uživatelů:", error));
+  .then(data => console.log(data))
+  .catch(error => console.error('Chyba při načítání uživatelů:', error));
