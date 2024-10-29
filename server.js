@@ -19,3 +19,17 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+app.get('/users', async (req, res) => {
+  try {
+    const users = await db.collection('users').find({}).toArray();
+    res.json(users);
+  } catch (error) {
+    res.status(500).send("Chyba při načítání uživatelů");
+  }
+});
+fetch('/users')
+  .then(response => response.json())
+  .then(data => {
+    // Logika pro zobrazení uživatelů
+  })
+  .catch(error => console.error("Chyba při načítání uživatelů:", error));
